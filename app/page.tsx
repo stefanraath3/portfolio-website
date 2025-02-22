@@ -38,7 +38,6 @@ export default function Page() {
           <Button variant="outline">Resume</Button>
         </div>
       </header>
-
       <main className="mx-auto max-w-7xl px-6">
         <section id="about" className="py-12 md:py-24 lg:py-32">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -47,8 +46,7 @@ export default function Page() {
                 Full Stack Developer
               </h1>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Building digital experiences with modern technologies. Focused
-                on creating elegant solutions to complex problems.
+                text
               </p>
             </div>
             <div className="space-x-4">
@@ -67,7 +65,7 @@ export default function Page() {
               <Link href="https://twitter.com" target="_blank">
                 <Button variant="outline" size="icon">
                   <Twitter className="h-4 w-4" />
-                  <span className="sr-only">Twitter</span>
+                  <span className="sr-only">X</span>
                 </Button>
               </Link>
               <Link href="mailto:hello@example.com">
