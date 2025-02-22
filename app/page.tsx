@@ -47,7 +47,9 @@ export default function Page() {
                 Full Stack Developer
               </h1>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                text
+                I believe humanity's last frontier is taste. Software should be
+                elegant, magical and delightful. I'm a full stack developer with
+                a passion for building beautiful and functional software.
               </p>
             </div>
             <div className="space-x-4">
