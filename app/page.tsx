@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import ContactForm from "./components/contact-form";
 import ProjectCard from "./components/project-card";
@@ -50,25 +51,33 @@ export default function Page() {
               </p>
             </div>
             <div className="space-x-4">
-              <Link href="https://github.com" target="_blank">
+              <Link href="https://github.com/stefanraath3" target="_blank">
                 <Button variant="outline" size="icon">
                   <Github className="h-4 w-4" />
                   <span className="sr-only">GitHub</span>
                 </Button>
               </Link>
-              <Link href="https://linkedin.com" target="_blank">
+              <Link
+                href="https://linkedin.com/in/stefan-raath-65351b201"
+                target="_blank"
+              >
                 <Button variant="outline" size="icon">
                   <Linkedin className="h-4 w-4" />
                   <span className="sr-only">LinkedIn</span>
                 </Button>
               </Link>
-              <Link href="https://twitter.com" target="_blank">
+              <Link href="https://x.com" target="_blank">
                 <Button variant="outline" size="icon">
-                  <Twitter className="h-4 w-4" />
+                  <Image
+                    src="/x-logo/logo.svg"
+                    alt="X"
+                    width={16}
+                    height={16}
+                  />
                   <span className="sr-only">X</span>
                 </Button>
               </Link>
-              <Link href="mailto:hello@example.com">
+              <Link href="mailto:stefanxraath@gmail.com">
                 <Button variant="outline" size="icon">
                   <Mail className="h-4 w-4" />
                   <span className="sr-only">Email</span>
