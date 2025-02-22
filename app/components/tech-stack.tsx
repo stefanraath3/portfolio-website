@@ -1,9 +1,16 @@
-import { Card } from "@/components/ui/card"
+import { Card } from "@/components/ui/card";
 
 const technologies = [
   {
     category: "Frontend",
-    skills: ["React", "Next.js", "TypeScript", "TailwindCSS", "Redux", "GraphQL"],
+    skills: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "TailwindCSS",
+      "Redux",
+      "GraphQL",
+    ],
   },
   {
     category: "Backend",
@@ -15,9 +22,19 @@ const technologies = [
   },
   {
     category: "Tools",
-    skills: ["VS Code", "Postman", "Figma", "Jest", "GitHub", "Vercel"],
+    skills: [
+      "Cursor",
+      "Windsurf",
+      "Bolt.new",
+      "V0",
+      "Postman",
+      "Figma",
+      "Jest",
+      "GitHub",
+      "Vercel",
+    ],
   },
-]
+];
 
 export default function TechStack() {
   return (
@@ -38,6 +55,5 @@ export default function TechStack() {
         </Card>
       ))}
     </div>
-  )
+  );
 }
-

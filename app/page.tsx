@@ -11,7 +11,9 @@ export default function Page() {
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="mx-auto max-w-7xl flex h-14 items-center justify-between px-6">
           <Link className="flex items-center space-x-2" href="/">
-            <span className="hidden font-bold sm:inline-block">Stefan.dev</span>
+            <span className="hidden font-bold sm:inline-block">
+              Stefan Raath
+            </span>
           </Link>
           <nav className="hidden md:flex items-center space-x-8">
             <Link
@@ -127,7 +129,7 @@ export default function Page() {
       <footer className="border-t">
         <div className="mx-auto max-w-7xl flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-6">
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            © 2024 Stefan.dev. All rights reserved.
+            © 2025 Stefan Raath. All rights reserved.
           </p>
           <nav className="sm:ml-auto flex gap-4 sm:gap-6">
             <Link
