@@ -1,3 +1,4 @@
+import ScribbleLink from "@/components/scribble-link";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
@@ -5,7 +6,6 @@ import Link from "next/link";
 import ContactForm from "./components/contact-form";
 import ProjectCard from "./components/project-card";
 import TechStack from "./components/tech-stack";
-
 export default function Page() {
   return (
     <div className="min-h-screen bg-background">
@@ -17,24 +17,9 @@ export default function Page() {
             </span>
           </Link>
           <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              href="#about"
-              className="transition-colors hover:text-foreground/80"
-            >
-              About
-            </Link>
-            <Link
-              href="#projects"
-              className="transition-colors hover:text-foreground/80"
-            >
-              Projects
-            </Link>
-            <Link
-              href="#contact"
-              className="transition-colors hover:text-foreground/80"
-            >
-              Contact
-            </Link>
+            <ScribbleLink href="#about">About</ScribbleLink>
+            <ScribbleLink href="#projects">Projects</ScribbleLink>
+            <ScribbleLink href="#contact">Contact</ScribbleLink>
           </nav>
           <Button variant="outline">Resume</Button>
         </div>
