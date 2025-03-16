@@ -1,12 +1,12 @@
+import HeroSection from "@/components/hero-section";
 import ScribbleLink from "@/components/scribble-link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import ContactForm from "../components/contact-form";
 import ProjectCard from "../components/project-card";
 import TechStack from "../components/tech-stack";
+
 export default function Page() {
   return (
     <div className="min-h-screen bg-background">
@@ -28,100 +28,57 @@ export default function Page() {
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-7xl px-6">
-        <section id="about" className="py-12 md:py-24 lg:py-32">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                Product Engineer
-              </h1>
-              <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Software should be elegant, magical and delightful. I'm a
-                builder with a passion for creating beautiful and functional
-                software.
-              </p>
-            </div>
-            <div className="space-x-4">
-              <Link href="https://github.com/stefanraath3" target="_blank">
-                <Button variant="outline" size="icon">
-                  <Github className="h-4 w-4" />
-                  <span className="sr-only">GitHub</span>
-                </Button>
-              </Link>
-              <Link
-                href="https://linkedin.com/in/stefan-raath-65351b201"
-                target="_blank"
-              >
-                <Button variant="outline" size="icon">
-                  <Linkedin className="h-4 w-4" />
-                  <span className="sr-only">LinkedIn</span>
-                </Button>
-              </Link>
-              <Link href="https://x.com" target="_blank">
-                <Button variant="outline" size="icon">
-                  <Image
-                    src="/x-logo/logo.svg"
-                    alt="X"
-                    width={16}
-                    height={16}
-                  />
-                  <span className="sr-only">X</span>
-                </Button>
-              </Link>
-              <Link href="mailto:stefanxraath@gmail.com">
-                <Button variant="outline" size="icon">
-                  <Mail className="h-4 w-4" />
-                  <span className="sr-only">Email</span>
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
 
-        <section id="projects" className="py-12 md:py-24 lg:py-32">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
-            Projects
-          </h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <ProjectCard
-              title="E-commerce Platform"
-              description="A full-stack e-commerce platform built with Next.js, Prisma, and Stripe integration."
-              image="/placeholder.webp"
-              link="https://github.com"
-              tags={["Next.js", "Prisma", "Stripe"]}
-            />
-            <ProjectCard
-              title="Task Management System"
-              description="A real-time task management application with team collaboration features."
-              image="/placeholder.webp"
-              link="https://github.com"
-              tags={["React", "Node.js", "Socket.io"]}
-            />
-            <ProjectCard
-              title="AI Chat Interface"
-              description="An AI-powered chat interface with natural language processing capabilities."
-              image="/placeholder.webp"
-              link="https://github.com"
-              tags={["OpenAI", "Next.js", "TailwindCSS"]}
-            />
-          </div>
-        </section>
+      {/* Hero section with contained SplashCursor effect */}
+      <HeroSection />
 
-        <section className="py-12 md:py-24 lg:py-32">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
-            Tech Stack
-          </h2>
-          <TechStack />
-        </section>
-
-        <section id="contact" className="py-12 md:py-24 lg:py-32">
-          <div className="mx-auto max-w-2xl">
+      <main className="mx-auto max-w-7xl bg-background">
+        <div className="px-6">
+          <section id="projects" className="py-12 md:py-24 lg:py-32">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
-              Get in Touch
+              Projects
             </h2>
-            <ContactForm />
-          </div>
-        </section>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <ProjectCard
+                title="E-commerce Platform"
+                description="A full-stack e-commerce platform built with Next.js, Prisma, and Stripe integration."
+                image="/placeholder.webp"
+                link="https://github.com"
+                tags={["Next.js", "Prisma", "Stripe"]}
+              />
+              <ProjectCard
+                title="Task Management System"
+                description="A real-time task management application with team collaboration features."
+                image="/placeholder.webp"
+                link="https://github.com"
+                tags={["React", "Node.js", "Socket.io"]}
+              />
+              <ProjectCard
+                title="AI Chat Interface"
+                description="An AI-powered chat interface with natural language processing capabilities."
+                image="/placeholder.webp"
+                link="https://github.com"
+                tags={["OpenAI", "Next.js", "TailwindCSS"]}
+              />
+            </div>
+          </section>
+
+          <section className="py-12 md:py-24 lg:py-32">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
+              Tech Stack
+            </h2>
+            <TechStack />
+          </section>
+
+          <section id="contact" className="py-12 md:py-24 lg:py-32">
+            <div className="mx-auto max-w-2xl">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
+                Get in Touch
+              </h2>
+              <ContactForm />
+            </div>
+          </section>
+        </div>
       </main>
 
       <footer className="border-t">
