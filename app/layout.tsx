@@ -8,8 +8,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Stefan Raath - Full Stack Developer",
-  description: "Full stack developer portfolio showcasing projects and skills",
+  title: "Stefan Raath - Product Engineer",
+  description: "Product engineer portfolio showcasing projects and skills",
 };
 
 export default function RootLayout({

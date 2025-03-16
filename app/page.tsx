@@ -1,11 +1,12 @@
 import ScribbleLink from "@/components/scribble-link";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import ContactForm from "./components/contact-form";
-import ProjectCard from "./components/project-card";
-import TechStack from "./components/tech-stack";
+import ContactForm from "../components/contact-form";
+import ProjectCard from "../components/project-card";
+import TechStack from "../components/tech-stack";
 export default function Page() {
   return (
     <div className="min-h-screen bg-background">
@@ -21,7 +22,10 @@ export default function Page() {
             <ScribbleLink href="#projects">Projects</ScribbleLink>
             <ScribbleLink href="#contact">Contact</ScribbleLink>
           </nav>
-          <Button variant="outline">Resume</Button>
+          <div className="flex items-center space-x-2">
+            <Button variant="outline">Resume</Button>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
       <main className="mx-auto max-w-7xl px-6">
@@ -29,12 +33,11 @@ export default function Page() {
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                Full Stack Developer
+                Product Engineer
               </h1>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                I believe humanity&apos;s last frontier is taste. Software
-                should be elegant, magical and delightful. I&apos;m a full stack
-                developer with a passion for building beautiful and functional
+                Software should be elegant, magical and delightful. I'm a
+                builder with a passion for creating beautiful and functional
                 software.
               </p>
             </div>
