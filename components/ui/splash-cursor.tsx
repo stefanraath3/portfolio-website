@@ -59,23 +59,23 @@ function SplashCursor({
     supportLinearFiltering: boolean;
   }
 
-  class PointerPrototype {
-    id = -1;
-    texcoordX = 0;
-    texcoordY = 0;
-    prevTexcoordX = 0;
-    prevTexcoordY = 0;
-    deltaX = 0;
-    deltaY = 0;
-    down = false;
-    moved = false;
-    color = { r: 0, g: 0, b: 0 };
-  }
-
   useEffect(() => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
+
+    class PointerPrototype {
+      id = -1;
+      texcoordX = 0;
+      texcoordY = 0;
+      prevTexcoordX = 0;
+      prevTexcoordY = 0;
+      deltaX = 0;
+      deltaY = 0;
+      down = false;
+      moved = false;
+      color = { r: 0, g: 0, b: 0 };
+    }
 
     // Configuration object
     const config = {
@@ -96,7 +96,7 @@ function SplashCursor({
       TRANSPARENT,
     };
 
-    let pointers: PointerPrototype[] = [new PointerPrototype()];
+    const pointers: PointerPrototype[] = [new PointerPrototype()];
 
     const { gl, ext } = getWebGLContext(canvas);
     if (!ext.supportLinearFiltering) {
@@ -141,8 +141,8 @@ function SplashCursor({
         throw new Error("Unable to get a WebGL2 context.");
       }
 
-      let halfFloat: any = null;
-      let supportLinearFiltering: any = null;
+      let halfFloat: OES_texture_half_float | null = null;
+      let supportLinearFiltering: OES_texture_half_float_linear | null = null;
 
       if (isWebGL2) {
         gl.getExtension("EXT_color_buffer_float");
@@ -1359,7 +1359,7 @@ function SplashCursor({
       let r = 0,
         g = 0,
         b = 0;
-      let i = Math.floor(h * 6);
+      const i = Math.floor(h * 6);
       const f = h * 6 - i;
       const p = v * (1 - s);
       const q = v * (1 - f * s);
@@ -1413,7 +1413,7 @@ function SplashCursor({
       height: number;
     } {
       const aspectRatio = gl.drawingBufferWidth / gl.drawingBufferHeight;
-      let resAspect = aspectRatio < 1 ? 1.0 / aspectRatio : aspectRatio;
+      const resAspect = aspectRatio < 1 ? 1.0 / aspectRatio : aspectRatio;
       const min = Math.round(resolution);
       const max = Math.round(resolution * resAspect);
       if (gl.drawingBufferWidth > gl.drawingBufferHeight) {
@@ -1524,7 +1524,7 @@ function SplashCursor({
       }
     }
 
-    function handleTouchEnd(e: TouchEvent) {
+    function handleTouchEnd() {
       const pointer = pointers[0];
       updatePointerUpData(pointer);
     }

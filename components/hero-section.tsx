@@ -65,8 +65,9 @@ export default function HeroSection() {
               "animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300 fill-mode-both"
             )}
           >
-            Software should be elegant, magical and delightful. I'm a builder
-            with a passion for creating beautiful and functional software.
+            Software should be elegant, magical and delightful. I&apos;m a
+            builder with a passion for creating beautiful and functional
+            software.
           </p>
         </div>
         <div
