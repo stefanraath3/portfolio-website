@@ -1,7 +1,6 @@
 import HeroSection from "@/components/hero-section";
 import ScribbleLink from "@/components/scribble-link";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ContactForm from "../components/contact-form";
 import TechStack from "../components/tech-stack";
@@ -22,7 +21,6 @@ export default function Page() {
             <ScribbleLink href="#contact">Contact</ScribbleLink>
           </nav>
           <div className="flex items-center space-x-2">
-            <Button variant="outline">Resume</Button>
             <ThemeToggle />
           </div>
         </div>
@@ -53,10 +51,14 @@ export default function Page() {
                   Synthesizing the present to command the future.
                 </p>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Building the next generation of operational intelligence—AI-powered platforms that fuse real-time, disconnected data into a unified, actionable picture for decision-makers around the world.
+                  Building the next generation of operational
+                  intelligence—AI-powered platforms that fuse real-time,
+                  disconnected data into a unified, actionable picture for
+                  decision-makers around the world.
                 </p>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Helping organizations master complex challenges and turn insight into lasting advantage.
+                  Helping organizations master complex challenges and turn
+                  insight into lasting advantage.
                 </p>
               </article>
               <article className="rounded-lg border border-border/60 bg-muted/5 p-6 transition-colors hover:bg-muted/10">
@@ -71,7 +73,9 @@ export default function Page() {
                   </Link>
                 </div>
                 <p className="mt-3 text-sm text-muted-foreground">
-                  Phoenix automates the entire intelligence workflow with autonomous agents—collecting, reasoning, and acting on data end-to-end so teams can ship decisions at machine speed.
+                  Phoenix automates the entire intelligence workflow with
+                  autonomous agents—collecting, reasoning, and acting on data
+                  end-to-end so teams can ship decisions at machine speed.
                 </p>
               </article>
             </div>
