@@ -1,125 +1,81 @@
+"use client";
+
 import HeroSection from "@/components/hero-section";
-import ScribbleLink from "@/components/scribble-link";
-import { ThemeToggle } from "@/components/theme-toggle";
+import ProjectGallery from "@/components/project-gallery";
+import TechMarquee from "@/components/tech-marquee";
+import ContactForm from "@/components/contact-form";
 import Link from "next/link";
-import ContactForm from "../components/contact-form";
-import TechStack from "../components/tech-stack";
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="mx-auto max-w-7xl flex h-14 items-center justify-between px-6">
-          <Link className="flex items-center space-x-2" href="/">
-            <span className="hidden font-bold sm:inline-block">
-              Stefan Raath
-            </span>
+    <main className="min-h-screen bg-background text-foreground selection:bg-blue-600 selection:text-white">
+      {/* Minimal Fixed Nav */}
+      <nav className="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-start z-50 mix-blend-difference text-white pointer-events-none">
+        <Link
+          href="/"
+          className="pointer-events-auto uppercase font-bold tracking-tighter text-xl"
+        >
+          SR©25
+        </Link>
+        <div className="flex flex-col items-end gap-1 pointer-events-auto">
+          <Link
+            href="mailto:stefanraath3@gmail.com"
+            className="uppercase text-xs font-mono tracking-widest hover:underline"
+          >
+            Contact
           </Link>
-          <nav className="hidden md:flex items-center space-x-8">
-            <ScribbleLink href="#about">About</ScribbleLink>
-            <ScribbleLink href="#projects">Projects</ScribbleLink>
-            <ScribbleLink href="#contact">Contact</ScribbleLink>
-          </nav>
-          <div className="flex items-center space-x-2">
-            <ThemeToggle />
-          </div>
+          <span className="uppercase text-xs font-mono tracking-widest opacity-50">
+            Available for work
+          </span>
         </div>
-      </header>
+      </nav>
 
-      {/* Hero section with contained SplashCursor effect */}
       <HeroSection />
 
-      <main className="mx-auto max-w-7xl bg-background">
-        <div className="px-6">
-          <section id="projects" className="py-12 md:py-24 lg:py-32">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
-              Projects
-            </h2>
-            <div className="mx-auto max-w-3xl space-y-6">
-              <article className="rounded-lg border border-border/60 bg-muted/5 p-6 transition-colors hover:bg-muted/10">
-                <div className="flex flex-wrap items-baseline gap-3">
-                  <h3 className="text-xl font-semibold">SentryCode</h3>
-                  <Link
-                    href="https://www.sentrycodetech.com"
-                    target="_blank"
-                    className="text-sm font-medium text-primary underline-offset-4 hover:underline"
-                  >
-                    sentrycodetech.com
-                  </Link>
-                </div>
-                <p className="mt-4 text-sm font-medium italic text-muted-foreground">
-                  Synthesizing the present to command the future.
-                </p>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Building the next generation of operational
-                  intelligence—AI-powered platforms that fuse real-time,
-                  disconnected data into a unified, actionable picture for
-                  decision-makers around the world.
-                </p>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Helping organizations master complex challenges and turn
-                  insight into lasting advantage.
-                </p>
-              </article>
-              <article className="rounded-lg border border-border/60 bg-muted/5 p-6 transition-colors hover:bg-muted/10">
-                <div className="flex flex-wrap items-baseline gap-3">
-                  <h3 className="text-xl font-semibold">Phoenix</h3>
-                  <Link
-                    href="https://www.pnxai.com"
-                    target="_blank"
-                    className="text-sm font-medium text-primary underline-offset-4 hover:underline"
-                  >
-                    pnxai.com
-                  </Link>
-                </div>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  Phoenix automates the entire intelligence workflow with
-                  autonomous agents—collecting, reasoning, and acting on data
-                  end-to-end so teams can ship decisions at machine speed.
-                </p>
-              </article>
-            </div>
-          </section>
-
-          <section className="py-12 md:py-24 lg:py-32">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
-              Tech Stack
-            </h2>
-            <TechStack />
-          </section>
-
-          <section id="contact" className="py-12 md:py-24 lg:py-32">
-            <div className="mx-auto max-w-2xl">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
-                Get in Touch
-              </h2>
-              <ContactForm />
-            </div>
-          </section>
+      <div className="relative z-20 bg-background">
+        <div className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
+          <p className="text-xl md:text-3xl font-light leading-relaxed max-w-4xl">
+            I craft digital experiences that merge{" "}
+            <span className="text-blue-600 font-medium">functionality</span>{" "}
+            with <span className="text-blue-600 font-medium">aesthetics</span>.
+            Based in the digital realm, obsessed with the details that others
+            miss.
+          </p>
         </div>
-      </main>
 
-      <footer className="border-t">
-        <div className="mx-auto max-w-7xl flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-6">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+        <ProjectGallery />
+        <TechMarquee />
+
+        <section className="py-32 bg-background border-t border-border/40">
+          <ContactForm />
+        </section>
+
+        <footer className="py-8 px-4 md:px-8 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs uppercase font-mono text-muted-foreground">
             © 2025 Stefan Raath. All rights reserved.
           </p>
-          <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+          <div className="flex gap-6">
             <Link
-              className="text-xs hover:underline underline-offset-4"
-              href="#"
+              href="https://github.com/stefanraath3"
+              className="text-xs uppercase font-mono text-muted-foreground hover:text-foreground transition-colors"
             >
-              Terms of Service
+              Github
             </Link>
             <Link
-              className="text-xs hover:underline underline-offset-4"
-              href="#"
+              href="https://linkedin.com/in/stefan-raath-65351b201"
+              className="text-xs uppercase font-mono text-muted-foreground hover:text-foreground transition-colors"
             >
-              Privacy
+              LinkedIn
             </Link>
-          </nav>
-        </div>
-      </footer>
-    </div>
+            <Link
+              href="https://x.com"
+              className="text-xs uppercase font-mono text-muted-foreground hover:text-foreground transition-colors"
+            >
+              X (Twitter)
+            </Link>
+          </div>
+        </footer>
+      </div>
+    </main>
   );
 }

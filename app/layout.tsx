@@ -1,16 +1,21 @@
-import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import type React from "react"; // Import React
+import { Inter, Playfair_Display } from "next/font/google";
 import { BotIdClient } from "botid/client";
 import "./globals.css";
+import { Providers } from "@/components/providers";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
-const protectedRoutes = [
-  { path: "/", method: "POST" }, // Server action from contact form
-];
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+});
+
+const protectedRoutes = [{ path: "/", method: "POST" }];
 
 export const metadata: Metadata = {
   title: "Stefan Raath - Product Engineer",
@@ -29,18 +34,12 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          inter.className
+          "min-h-screen bg-background font-sans antialiased selection:bg-blue-600 selection:text-white",
+          inter.variable,
+          playfair.variable
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
