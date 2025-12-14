@@ -43,7 +43,7 @@ export default function ContactForm() {
     // Scramble effect
     let iteration = 0;
     intervalRef.current = setInterval(() => {
-      setDisplayState((prev) => ({
+      setDisplayState({
         name: formState.name
           .split("")
           .map(() => CHARS[Math.floor(Math.random() * CHARS.length)])
@@ -56,7 +56,7 @@ export default function ContactForm() {
           .split("")
           .map(() => CHARS[Math.floor(Math.random() * CHARS.length)])
           .join(""),
-      }));
+      });
       iteration++;
       if (iteration > 20) {
         clearInterval(intervalRef.current);
@@ -104,7 +104,7 @@ export default function ContactForm() {
             className="w-full"
           >
             <h2 className="text-[10vw] md:text-[5vw] font-bold leading-[0.8] tracking-tighter uppercase mb-12">
-              Let's Talk
+              Let&apos;s Talk
             </h2>
             <form action={handleSubmit} className="space-y-12">
               <div className="group">
@@ -112,7 +112,7 @@ export default function ContactForm() {
                   htmlFor="name"
                   className="block text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-foreground transition-colors"
                 >
-                  01. What's your name?
+                  01. What&apos;s your name?
                 </label>
                 <Input
                   id="name"
@@ -136,7 +136,7 @@ export default function ContactForm() {
                   htmlFor="email"
                   className="block text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2 group-focus-within:text-foreground transition-colors"
                 >
-                  02. What's your email?
+                  02. What&apos;s your email?
                 </label>
                 <Input
                   id="email"

@@ -1,16 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  useMotionValue,
-} from "framer-motion";
+import { motion, useSpring, useMotionValue } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 const projects = [
