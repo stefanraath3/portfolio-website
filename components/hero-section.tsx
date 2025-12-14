@@ -1,62 +1,165 @@
 "use client";
 
-import { useScroll, useTransform, motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { ArrowDownRight } from "lucide-react";
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLHeadingElement>(null);
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
+  // Scroll parallax effects
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  
+  // Mouse interaction for background parallax
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+  
+  // Map mouse to small displacement for background blobs
+  const blobX = useTransform(smoothMouseX, [0, typeof window !== 'undefined' ? window.innerWidth : 1000], [-50, 50]);
+  const blobY = useTransform(smoothMouseY, [0, typeof window !== 'undefined' ? window.innerHeight : 1000], [-50, 50]);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    mouseX.set(clientX);
+    mouseY.set(clientY);
+  };
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
 
   return (
     <section
       ref={containerRef}
-      className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-background"
+      onMouseMove={handleMouseMove}
+      className="relative h-screen min-h-[800px] flex flex-col items-center justify-center overflow-hidden bg-background"
     >
+      {/* SVG Filter Definition */}
+      <svg className="absolute w-0 h-0">
+        <defs>
+          <filter id="liquid-filter">
+            <feTurbulence 
+              type="fractalNoise" 
+              baseFrequency="0.015 0.002" 
+              numOctaves="1" 
+              result="warp"
+            >
+              <animate 
+                attributeName="baseFrequency" 
+                dur="16s" 
+                values="0.015 0.002;0.005 0.004;0.015 0.002" 
+                repeatCount="indefinite" 
+              />
+            </feTurbulence>
+            <feDisplacementMap 
+              xChannelSelector="R" 
+              yChannelSelector="G" 
+              scale="30" 
+              in="SourceGraphic" 
+              in2="warp" 
+            />
+          </filter>
+        </defs>
+      </svg>
+
+      {/* Decorative Gradients with Parallax */}
+      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+        <motion.div 
+          style={{ x: blobX, y: blobY }}
+          className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-blue-500/10 rounded-full blur-[120px]" 
+        />
+        <motion.div 
+          style={{ x: useTransform(blobX, (v) => -v), y: useTransform(blobY, (v) => -v) }}
+          className="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] bg-purple-500/10 rounded-full blur-[100px]" 
+        />
+      </div>
+
       <motion.div
         style={{ y, opacity, scale }}
-        className="z-10 flex flex-col items-center justify-center w-full px-4 sm:px-6 md:px-8"
+        className="z-10 flex flex-col items-center justify-center w-full px-4 sm:px-6 relative"
       >
-        <h1 className="text-[15vw] sm:text-[12vw] md:text-[10vw] leading-[0.85] sm:leading-[0.8] font-bold tracking-tighter text-center uppercase mix-blend-difference text-foreground">
-          Stefan
-          <br />
-          Raath
-        </h1>
-        <div className="mt-6 sm:mt-8 flex items-center gap-2 sm:gap-4 overflow-hidden">
+        {/* Top Label */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="absolute top-[-15vh] md:top-[-20vh] left-4 md:left-0 flex items-center gap-2"
+        >
+           <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+           <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">Online • Based in Digital Realm</span>
+        </motion.div>
+
+        {/* Main Title - The Liquid Effect */}
+        <div className="relative group cursor-default">
+           <motion.h1 
+             ref={textRef}
+             initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+             className="text-[16vw] sm:text-[14vw] md:text-[13vw] leading-[0.8] font-bold tracking-tighter text-center uppercase text-foreground mix-blend-difference select-none"
+             style={{ 
+               filter: "url(#liquid-filter)",
+             }}
+           >
+             Stefan
+             <br />
+             Raath
+           </motion.h1>
+           
+           {/* Hover reveal or accent */}
+           <motion.div
+              className="absolute -inset-4 hidden md:block opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay"
+              style={{
+                background: "radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)"
+              }}
+           />
+        </div>
+
+        {/* Bottom Info Bar */}
+        <div className="mt-12 w-full max-w-4xl flex flex-col md:flex-row justify-between items-end md:items-start gap-8 mix-blend-difference">
           <motion.div
-            initial={{ x: "-100%" }}
-            animate={{ x: "0%" }}
-            transition={{ duration: 1, delay: 0.5, ease: [0.33, 1, 0.68, 1] }}
-            className="h-[1px] w-6 sm:w-8 md:w-12 bg-foreground/50"
-          />
-          <motion.span
-            initial={{ y: "100%" }}
-            animate={{ y: "0%" }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.33, 1, 0.68, 1] }}
-            className="text-xs sm:text-sm md:text-xl font-medium tracking-wider sm:tracking-widest uppercase text-muted-foreground whitespace-nowrap"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="flex flex-col gap-2"
           >
-            Product Engineer
-          </motion.span>
+             <p className="text-sm md:text-base font-medium max-w-[200px]">
+               Product Engineer crafting high-end digital experiences.
+             </p>
+          </motion.div>
+
           <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: "0%" }}
-            transition={{ duration: 1, delay: 0.5, ease: [0.33, 1, 0.68, 1] }}
-            className="h-[1px] w-6 sm:w-8 md:w-12 bg-foreground/50"
-          />
+             initial={{ opacity: 0, x: 20 }}
+             animate={{ opacity: 1, x: 0 }}
+             transition={{ duration: 0.8, delay: 1 }}
+             className="flex flex-col items-end gap-1"
+          >
+             <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">Est. 2025</span>
+             <div className="flex items-center gap-2 text-sm font-medium hover:text-blue-500 transition-colors cursor-pointer group">
+               Scroll to explore
+               <ArrowDownRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform" />
+             </div>
+          </motion.div>
         </div>
       </motion.div>
-
-      {/* Abstract decorative elements */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[10%] left-[5%] w-[30vw] h-[30vw] border border-foreground/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[10%] right-[5%] w-[20vw] h-[20vw] border border-foreground/5 rounded-full blur-[80px]" />
-      </div>
+      
+      {/* Noise is now handled globally in page.tsx or we can keep a local one for safety. 
+          Since I removed the local noise div to rely on page.tsx, I'll stick with that. 
+          But wait, I want the noise to be consistent. 
+          I'll leave it out here and rely on page.tsx.
+      */}
     </section>
   );
 }
