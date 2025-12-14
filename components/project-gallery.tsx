@@ -5,7 +5,6 @@ import {
   motion,
   useSpring,
   useMotionValue,
-  AnimatePresence,
 } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -40,7 +39,6 @@ const projects = [
 
 export default function ProjectGallery() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
-  const [expandedProject, setExpandedProject] = useState<number | null>(null);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
@@ -113,69 +111,21 @@ export default function ProjectGallery() {
                     href={project.href}
                     target="_blank"
                     className="block"
-                    onClick={(e) => {
-                      if (isMobile) {
-                        e.preventDefault();
-                        setExpandedProject(
-                          expandedProject === index ? null : index
-                        );
-                      }
-                    }}
                   >
                     <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4 z-10 relative">
                       <ProjectTitle
                         title={project.title}
-                        isHovered={
-                          hoveredProject === index ||
-                          (isMobile && expandedProject === index)
-                        }
+                        isHovered={hoveredProject === index}
                       />
                       <div className="flex items-center gap-4 transition-transform duration-500 md:group-hover:translate-x-4">
                         <span className="text-sm md:text-lg font-light text-muted-foreground md:group-hover:text-foreground transition-colors">
                           {project.category}
                         </span>
                         <ArrowUpRight className="opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 md:block hidden" />
-                        {isMobile && (
-                          <ArrowUpRight
-                            className={cn(
-                              "transition-transform duration-300",
-                              expandedProject === index ? "rotate-45" : ""
-                            )}
-                          />
-                        )}
                       </div>
                     </div>
                   </Link>
                 </div>
-
-                {/* Mobile Image Preview */}
-                {isMobile && (
-                  <AnimatePresence>
-                    {expandedProject === index && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="overflow-hidden px-4 md:px-0"
-                      >
-                        <Link
-                          href={project.href}
-                          target="_blank"
-                          className="block relative w-full aspect-[4/5] mb-8 rounded-lg overflow-hidden"
-                        >
-                          <Image
-                            src={project.src}
-                            alt={project.title}
-                            fill
-                            className="object-cover"
-                            sizes="100vw"
-                          />
-                        </Link>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                )}
               </div>
             );
           })}
