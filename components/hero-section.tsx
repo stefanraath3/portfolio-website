@@ -21,25 +21,25 @@ export default function HeroSection() {
     >
       <motion.div
         style={{ y, opacity, scale }}
-        className="z-10 flex flex-col items-center justify-center w-full px-4"
+        className="z-10 flex flex-col items-center justify-center w-full px-4 sm:px-6 md:px-8"
       >
-        <h1 className="text-[12vw] leading-[0.8] font-bold tracking-tighter text-center uppercase mix-blend-difference text-foreground">
+        <h1 className="text-[15vw] sm:text-[12vw] md:text-[10vw] leading-[0.85] sm:leading-[0.8] font-bold tracking-tighter text-center uppercase mix-blend-difference text-foreground">
           Stefan
           <br />
           Raath
         </h1>
-        <div className="mt-8 flex items-center gap-4 overflow-hidden">
+        <div className="mt-6 sm:mt-8 flex items-center gap-2 sm:gap-4 overflow-hidden">
           <motion.div
             initial={{ x: "-100%" }}
             animate={{ x: "0%" }}
             transition={{ duration: 1, delay: 0.5, ease: [0.33, 1, 0.68, 1] }}
-            className="h-[1px] w-12 bg-foreground/50"
+            className="h-[1px] w-6 sm:w-8 md:w-12 bg-foreground/50"
           />
           <motion.span
             initial={{ y: "100%" }}
             animate={{ y: "0%" }}
             transition={{ duration: 1, delay: 0.6, ease: [0.33, 1, 0.68, 1] }}
-            className="text-sm md:text-xl font-medium tracking-widest uppercase text-muted-foreground"
+            className="text-xs sm:text-sm md:text-xl font-medium tracking-wider sm:tracking-widest uppercase text-muted-foreground whitespace-nowrap"
           >
             Product Engineer
           </motion.span>
@@ -47,7 +47,7 @@ export default function HeroSection() {
             initial={{ x: "100%" }}
             animate={{ x: "0%" }}
             transition={{ duration: 1, delay: 0.5, ease: [0.33, 1, 0.68, 1] }}
-            className="h-[1px] w-12 bg-foreground/50"
+            className="h-[1px] w-6 sm:w-8 md:w-12 bg-foreground/50"
           />
         </div>
       </motion.div>

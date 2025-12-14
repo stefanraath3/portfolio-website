@@ -10,21 +10,21 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-blue-600 selection:text-white">
       {/* Minimal Fixed Nav */}
-      <nav className="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-start z-50 mix-blend-difference text-white pointer-events-none">
+      <nav className="fixed top-0 left-0 w-full p-4 sm:p-6 md:p-8 flex justify-between items-start z-50 mix-blend-difference text-white pointer-events-none">
         <Link
           href="/"
-          className="pointer-events-auto uppercase font-bold tracking-tighter text-xl"
+          className="pointer-events-auto uppercase font-bold tracking-tighter text-base sm:text-lg md:text-xl"
         >
           SR©25
         </Link>
-        <div className="flex flex-col items-end gap-1 pointer-events-auto">
-          <Link
+        <div className="flex flex-col items-end gap-0.5 sm:gap-1 pointer-events-auto">
+          <a
             href="mailto:stefanraath3@gmail.com"
-            className="uppercase text-xs font-mono tracking-widest hover:underline"
+            className="uppercase text-[10px] sm:text-xs font-mono tracking-wider sm:tracking-widest hover:underline"
           >
             Contact
-          </Link>
-          <span className="uppercase text-xs font-mono tracking-widest opacity-50">
+          </a>
+          <span className="uppercase text-[10px] sm:text-xs font-mono tracking-wider sm:tracking-widest opacity-50">
             Available for work
           </span>
         </div>
