@@ -12,6 +12,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useReverseScramble } from "@/hooks/use-scramble";
 
 const projects = [
   {
@@ -40,6 +41,7 @@ const projects = [
 export default function ProjectGallery() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
@@ -70,81 +72,113 @@ export default function ProjectGallery() {
         </h2>
 
         <div className="flex flex-col">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="group relative border-t border-border/40 transition-colors"
-            >
+          {projects.map((project, index) => {
+            const ProjectTitle = ({
+              title,
+              isHovered,
+            }: {
+              title: string;
+              isHovered: boolean;
+            }) => {
+              const scrambledTitle = useReverseScramble(title, isHovered, 300);
+
+              return (
+                <h3 className="text-4xl md:text-7xl font-bold tracking-tighter uppercase transition-transform duration-500 md:group-hover:-translate-x-4">
+                  {scrambledTitle}
+                </h3>
+              );
+            };
+
+            return (
               <div
-                className="py-8 md:py-20 transition-colors md:hover:bg-white/5"
-                onMouseEnter={() => !isMobile && setActiveProject(index)}
-                onMouseLeave={() => !isMobile && setActiveProject(null)}
+                key={index}
+                className="group relative border-t border-border/40 transition-colors"
               >
-                <Link
-                  href={project.href}
-                  target="_blank"
-                  className="block"
-                  onClick={(e) => {
-                    if (isMobile) {
-                      e.preventDefault();
-                      setExpandedProject(
-                        expandedProject === index ? null : index
-                      );
+                <div
+                  className="py-8 md:py-20 transition-colors md:hover:bg-white/5"
+                  onMouseEnter={() => {
+                    if (!isMobile) {
+                      setActiveProject(index);
+                      setHoveredProject(index);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    if (!isMobile) {
+                      setActiveProject(null);
+                      setHoveredProject(null);
                     }
                   }}
                 >
-                  <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4 z-10 relative">
-                    <h3 className="text-4xl md:text-7xl font-bold tracking-tighter uppercase transition-transform duration-500 md:group-hover:-translate-x-4">
-                      {project.title}
-                    </h3>
-                    <div className="flex items-center gap-4 transition-transform duration-500 md:group-hover:translate-x-4">
-                      <span className="text-sm md:text-lg font-light text-muted-foreground md:group-hover:text-foreground transition-colors">
-                        {project.category}
-                      </span>
-                      <ArrowUpRight className="opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 md:block hidden" />
-                      {isMobile && (
-                        <ArrowUpRight
-                          className={cn(
-                            "transition-transform duration-300",
-                            expandedProject === index ? "rotate-45" : ""
-                          )}
-                        />
-                      )}
+                  <Link
+                    href={project.href}
+                    target="_blank"
+                    className="block"
+                    onClick={(e) => {
+                      if (isMobile) {
+                        e.preventDefault();
+                        setExpandedProject(
+                          expandedProject === index ? null : index
+                        );
+                      }
+                    }}
+                  >
+                    <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4 z-10 relative">
+                      <ProjectTitle
+                        title={project.title}
+                        isHovered={
+                          hoveredProject === index ||
+                          (isMobile && expandedProject === index)
+                        }
+                      />
+                      <div className="flex items-center gap-4 transition-transform duration-500 md:group-hover:translate-x-4">
+                        <span className="text-sm md:text-lg font-light text-muted-foreground md:group-hover:text-foreground transition-colors">
+                          {project.category}
+                        </span>
+                        <ArrowUpRight className="opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 md:block hidden" />
+                        {isMobile && (
+                          <ArrowUpRight
+                            className={cn(
+                              "transition-transform duration-300",
+                              expandedProject === index ? "rotate-45" : ""
+                            )}
+                          />
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </div>
+                  </Link>
+                </div>
 
-              {/* Mobile Image Preview */}
-              {isMobile && (
-                <AnimatePresence>
-                  {expandedProject === index && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="overflow-hidden px-4 md:px-0"
-                    >
-                      <Link
-                        href={project.href}
-                        target="_blank"
-                        className="block relative w-full aspect-[4/5] mb-8 rounded-lg overflow-hidden"
+                {/* Mobile Image Preview */}
+                {isMobile && (
+                  <AnimatePresence>
+                    {expandedProject === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden px-4 md:px-0"
                       >
-                        <Image
-                          src={project.src}
-                          alt={project.title}
-                          fill
-                          className="object-cover"
-                          sizes="100vw"
-                        />
-                      </Link>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              )}
-            </div>
-          ))}
+                        <Link
+                          href={project.href}
+                          target="_blank"
+                          className="block relative w-full aspect-[4/5] mb-8 rounded-lg overflow-hidden"
+                        >
+                          <Image
+                            src={project.src}
+                            alt={project.title}
+                            fill
+                            className="object-cover"
+                            sizes="100vw"
+                          />
+                        </Link>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+              </div>
+            );
+          })}
           <div className="border-t border-border/40" />
         </div>
       </div>

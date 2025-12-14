@@ -61,3 +61,96 @@ export function useScrambleInput(trigger: boolean) {
 
   return scramble;
 }
+
+export function useReverseScramble(
+  text: string,
+  isHovered: boolean,
+  duration: number = 300
+) {
+  const [displayText, setDisplayText] = useState(text);
+  const animationRef = useRef<number>();
+
+  useEffect(() => {
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
+
+    if (!isHovered) {
+      setDisplayText(text);
+      return;
+    }
+
+    const reversed = text.split("").reverse().join("");
+    const startTime = Date.now();
+
+    // First phase: reverse the text
+    const reverseAnimate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Ease in-out for smooth animation
+      const eased =
+        progress < 0.5
+          ? 2 * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+      const currentLength = Math.floor(eased * text.length);
+      const result = text
+        .split("")
+        .map((_, index) => {
+          if (index < currentLength) {
+            return reversed[index];
+          }
+          return text[index];
+        })
+        .join("");
+
+      setDisplayText(result);
+
+      if (progress < 1) {
+        animationRef.current = requestAnimationFrame(reverseAnimate);
+      } else {
+        // Second phase: return to normal
+        const returnStartTime = Date.now();
+        const returnAnimate = () => {
+          const returnElapsed = Date.now() - returnStartTime;
+          const returnProgress = Math.min(returnElapsed / duration, 1);
+          const returnEased =
+            returnProgress < 0.5
+              ? 2 * returnProgress * returnProgress
+              : 1 - Math.pow(-2 * returnProgress + 2, 2) / 2;
+
+          const returnCurrentLength = Math.floor(returnEased * text.length);
+          const returnResult = reversed
+            .split("")
+            .map((_, index) => {
+              if (index < returnCurrentLength) {
+                return text[index];
+              }
+              return reversed[index];
+            })
+            .join("");
+
+          setDisplayText(returnResult);
+
+          if (returnProgress < 1) {
+            animationRef.current = requestAnimationFrame(returnAnimate);
+          } else {
+            setDisplayText(text);
+          }
+        };
+        animationRef.current = requestAnimationFrame(returnAnimate);
+      }
+    };
+
+    animationRef.current = requestAnimationFrame(reverseAnimate);
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [text, isHovered, duration]);
+
+  return displayText;
+}
