@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 
@@ -11,14 +12,14 @@ const projects = [
     title: "SentryCode",
     category: "Operational Intelligence",
     href: "https://www.sentrycodetech.com",
-    src: "/placeholder.webp", // Fallback for now, user should replace
+    src: "/sentrycode.png",
     color: "#0000FF", // Electric Blue
   },
   {
     title: "Phoenix",
     category: "Autonomous Agents",
     href: "https://www.pnxai.com",
-    src: "/placeholder.webp",
+    src: "/phoenix.png",
     color: "#FF4D00", // Orange/Red
   },
   {
@@ -101,18 +102,17 @@ export default function ProjectGallery() {
           <div
             key={index}
             className={cn(
-              "absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-300",
+              "absolute inset-0 w-full h-full transition-opacity duration-300",
               activeProject === index ? "opacity-100" : "opacity-0"
             )}
-            style={{ backgroundColor: project.color }} // Fallback color
           >
-            {/* 
-                  NOTE: Using a colored div as placeholder. 
-                  In production, you would use Image component here with project.src 
-                */}
-            <div className="absolute inset-0 flex items-center justify-center text-black/50 font-bold text-2xl uppercase tracking-widest mix-blend-overlay">
-              {project.title}
-            </div>
+            <Image
+              src={project.src}
+              alt={project.title}
+              fill
+              className="object-cover rounded-lg"
+              sizes="300px"
+            />
           </div>
         ))}
       </motion.div>
