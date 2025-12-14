@@ -4,16 +4,11 @@ import HeroSection from "@/components/hero-section";
 import ProjectGallery from "@/components/project-gallery";
 import TechMarquee from "@/components/tech-marquee";
 import ContactForm from "@/components/contact-form";
-import { CustomCursor } from "@/components/custom-cursor";
-import NoiseOverlay from "@/components/noise-overlay";
 import Link from "next/link";
 
 export default function Page() {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-blue-600 selection:text-white">
-      <CustomCursor />
-      <NoiseOverlay />
-      
       {/* Minimal Fixed Nav */}
       <nav className="fixed top-0 left-0 w-full p-4 sm:p-6 md:p-8 flex justify-between items-start z-50 mix-blend-difference text-white pointer-events-none">
         <Link

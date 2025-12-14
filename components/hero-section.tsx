@@ -35,9 +35,8 @@ export default function HeroSection() {
     mouseY.set(clientY);
   };
 
-  const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    setIsLoaded(true);
+    // Entrance animation logic if needed
   }, []);
 
   return (
