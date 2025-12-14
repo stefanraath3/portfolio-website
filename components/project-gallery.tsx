@@ -22,9 +22,9 @@ const projects = [
     color: "#FF4D00", // Orange/Red
   },
   {
-    title: "Portfolio",
-    category: "Design Engineering",
-    href: "/",
+    title: "Stealth",
+    category: "Coming Soon",
+    href: "#",
     src: "/placeholder.webp",
     color: "#00FF94", // Neon Green
   },
