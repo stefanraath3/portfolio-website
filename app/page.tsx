@@ -19,7 +19,7 @@ export default function Page() {
         </Link>
         <div className="flex flex-col items-end gap-0.5 sm:gap-1 pointer-events-auto">
           <a
-            href="mailto:stefanraath3@gmail.com"
+            href="#contact"
             className="uppercase text-[10px] sm:text-xs font-mono tracking-wider sm:tracking-widest hover:underline"
           >
             Contact
@@ -46,7 +46,10 @@ export default function Page() {
         <ProjectGallery />
         <TechMarquee />
 
-        <section className="py-32 bg-background border-t border-border/40">
+        <section
+          id="contact"
+          className="py-32 bg-background border-t border-border/40"
+        >
           <ContactForm />
         </section>
 
