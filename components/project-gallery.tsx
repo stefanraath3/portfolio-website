@@ -121,7 +121,7 @@ export default function ProjectGallery() {
                         <span className="text-sm md:text-lg font-light text-muted-foreground md:group-hover:text-foreground transition-colors">
                           {project.category}
                         </span>
-                        <ArrowUpRight className="opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 md:block hidden" />
+                        <ArrowUpRight className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                     </div>
                   </Link>
