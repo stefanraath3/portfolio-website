@@ -15,7 +15,7 @@ export default function Page() {
           href="/"
           className="pointer-events-auto uppercase font-bold tracking-tighter text-base sm:text-lg md:text-xl"
         >
-          SR©25
+          SR©26
         </Link>
         <div className="flex flex-col items-end gap-0.5 sm:gap-1 pointer-events-auto">
           <a
