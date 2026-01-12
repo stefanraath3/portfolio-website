@@ -66,7 +66,7 @@ export default function ProjectGallery() {
     >
       <div className="max-w-7xl mx-auto">
         <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-16 ml-2">
-          Selected Works (2024-2025)
+          Selected Works (2024-2026)
         </h2>
 
         <div className="flex flex-col">

@@ -55,7 +55,7 @@ export default function Page() {
 
         <footer className="py-8 px-4 md:px-8 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs uppercase font-mono text-muted-foreground">
-            © 2025 Stefan Raath. All rights reserved.
+            © 2026 Stefan Raath. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link
