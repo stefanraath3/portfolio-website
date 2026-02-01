@@ -136,7 +136,7 @@ export default function ProjectGallery() {
       {/* Floating Image Preview */}
       <motion.div
         style={{ x, y }}
-        className="pointer-events-none fixed top-0 left-0 w-[300px] h-[400px] z-30 hidden md:block rounded-lg overflow-hidden"
+        className="pointer-events-none fixed top-0 left-0 w-[400px] h-[225px] z-30 hidden md:block rounded-lg overflow-hidden"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{
           opacity: activeProject !== null ? 1 : 0,
@@ -157,7 +157,7 @@ export default function ProjectGallery() {
               alt={project.title}
               fill
               className="object-cover rounded-lg"
-              sizes="300px"
+              sizes="400px"
             />
           </div>
         ))}
